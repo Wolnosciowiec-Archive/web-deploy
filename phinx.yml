@@ -1,0 +1,8 @@
+paths:
+    migrations: ./migrations
+environments:
+    default_migration_table: schema_migrations
+    default_database: default
+    default:
+        adapter: sqlite
+        name: /tmp/test-database.sqlite3
