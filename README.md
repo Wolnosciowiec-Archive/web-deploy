@@ -1,6 +1,9 @@
 Web Deploy
 ==========
 
+[![Build Status](https://travis-ci.org/Wolnosciowiec/web-deploy.svg?branch=master)](https://travis-ci.org/Wolnosciowiec/web-deploy)
+[![Code quality](https://scrutinizer-ci.com/g/Wolnosciowiec/web-deploy/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Wolnosciowiec/web-deploy/)
+
 A Framework for creation of post-install scripts dedicated for applications hosted on shared hosting (without access to the shell).
 
 Allows to execute scripts after installing the application on the destination FTP server.
@@ -11,7 +14,7 @@ Contains builtin tasks:
 
 ## Example of usage
 
-```
+```php
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
