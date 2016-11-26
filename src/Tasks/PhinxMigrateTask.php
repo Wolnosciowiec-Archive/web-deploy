@@ -28,7 +28,7 @@ namespace Wolnosciowiec\WebDeploy\Tasks;
 
 use Phinx\Wrapper\TextWrapper;
 use \Psr\Http\Message\RequestInterface;
-use Wolnosciowiec\WebDeploy\Exceptions\DeploymentFailure;
+use Wolnosciowiec\WebDeploy\Exceptions\DeploymentFailureException;
 
 /**
  * @package Wolnosciowiec\WebDeploy\Tasks
@@ -89,7 +89,7 @@ class PhinxMigrateTask implements TaskInterface
         $action = $wrap->getMigrate($this->getEnvironment(), $this->getTarget());
 
         if ($wrap->getExitCode() !== 0) {
-            throw new DeploymentFailure('Phinx failed with a non-zero exit code, details: "' . $action . '"');
+            throw new DeploymentFailureException('Phinx failed with a non-zero exit code, details: "' . $action . '"');
         }
 
         return $action;

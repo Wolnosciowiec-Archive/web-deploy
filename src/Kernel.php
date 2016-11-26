@@ -29,7 +29,7 @@ namespace Wolnosciowiec\WebDeploy;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Wolnosciowiec\WebDeploy\Exceptions\DeploymentFailure;
+use Wolnosciowiec\WebDeploy\Exceptions\DeploymentFailureException;
 use Wolnosciowiec\WebDeploy\Tasks\TaskInterface;
 
 /**
@@ -53,6 +53,14 @@ class Kernel
     }
 
     /**
+     * @return TaskInterface[]
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
      * @param RequestInterface $request
      * @return ResponseInterface
      */
@@ -67,7 +75,7 @@ class Kernel
             try {
                 $output[$taskName] = $task->execute($request);
 
-            } catch (DeploymentFailure $e) {
+            } catch (DeploymentFailureException $e) {
                 return new Response(
                     500, [
                     'Content-Type: application/json'
