@@ -40,22 +40,22 @@ class PhinxMigrateTask implements TaskInterface
      */
     protected $configurationPath = null;
 
-    protected function getEnvironment()
+    protected function getEnvironment(): string
     {
         return getenv('WL_PHINX_ENV') ? getenv('WL_PHINX_ENV') : null;
     }
 
-    protected function getTarget()
+    protected function getTarget(): string
     {
         return getenv('WL_PHINX_TARGET') ? getenv('WL_PHINX_TARGET') : null;
     }
 
-    protected function getParser()
+    protected function getParser(): string
     {
         return getenv('WL_PHINX_PARSER') ? getenv('WL_PHINX_PARSER') : 'Yaml';
     }
 
-    protected function getConfigurationPath()
+    protected function getConfigurationPath(): string
     {
         if ($this->configurationPath === null) {
             foreach (array_filter([
@@ -78,9 +78,34 @@ class PhinxMigrateTask implements TaskInterface
         return $this->configurationPath;
     }
 
+    private function getPhinxPath(): string
+    {
+        $paths = [
+            __DIR__ . '/../../vendor/robmorgan/phinx/app/phinx.php',
+            __DIR__ . '/../../../../robmorgan/phinx/app/phinx.php',
+            getenv('WL_PHINX_APP_PATH')
+        ];
+
+        foreach (array_filter($paths) as $path) {
+            if (is_file($path)) {
+                return $path;
+            }
+        }
+
+        throw new \Exception('Cannot find phinx path!');
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @throws DeploymentFailureException
+     * @throws \Exception
+     *
+     * @return string
+     */
     public function execute(RequestInterface $request): string
     {
-        $app = require __DIR__ . '/../../vendor/robmorgan/phinx/app/phinx.php';
+        $app = require $this->getPhinxPath();
         $wrap = new TextWrapper($app);
 
         $wrap->setOption('configuration', $this->getConfigurationPath());
