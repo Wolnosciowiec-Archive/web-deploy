@@ -3,6 +3,7 @@ Web Deploy
 
 [![Build Status](https://travis-ci.org/Wolnosciowiec/web-deploy.svg?branch=master)](https://travis-ci.org/Wolnosciowiec/web-deploy)
 [![Code quality](https://scrutinizer-ci.com/g/Wolnosciowiec/web-deploy/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Wolnosciowiec/web-deploy/)
+[![Coverage Status](https://coveralls.io/repos/github/Wolnosciowiec/web-deploy/badge.svg?branch=master)](https://coveralls.io/github/Wolnosciowiec/web-deploy?branch=master)
 
 A Framework for creation of post-install scripts dedicated for applications hosted on shared hosting (without access to the shell).
 
