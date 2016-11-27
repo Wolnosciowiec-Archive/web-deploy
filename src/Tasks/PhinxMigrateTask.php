@@ -40,12 +40,12 @@ class PhinxMigrateTask implements TaskInterface
      */
     protected $configurationPath = null;
 
-    protected function getEnvironment(): string
+    protected function getEnvironment()
     {
         return getenv('WL_PHINX_ENV') ? getenv('WL_PHINX_ENV') : null;
     }
 
-    protected function getTarget(): string
+    protected function getTarget()
     {
         return getenv('WL_PHINX_TARGET') ? getenv('WL_PHINX_TARGET') : null;
     }
