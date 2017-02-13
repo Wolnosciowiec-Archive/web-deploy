@@ -52,6 +52,17 @@ class PhinxMigrateTask implements TaskInterface
 
     protected function getParser(): string
     {
+        if (!getenv('WL_PHINX_PARSER')) {
+            $ext = strtolower(pathinfo($this->getConfigurationPath(), PATHINFO_EXTENSION));
+
+            if (in_array($ext, ['yml', 'yaml'])) {
+                return 'Yaml';
+            }
+            elseif ($ext == 'php') {
+                return 'Php';
+            }
+        }
+
         return getenv('WL_PHINX_PARSER') ? getenv('WL_PHINX_PARSER') : 'Yaml';
     }
 
